@@ -1,3 +1,3 @@
 # The General Safety cloud platform
 
-proprieatry and confidential
+proprietary and confidential
