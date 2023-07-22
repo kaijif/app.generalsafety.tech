@@ -21,7 +21,14 @@ export default function SignInPage({ username, setUsername, password, setPasswor
         const formJson = Object.fromEntries(formData.entries())
         console.log(formJson)
         setProcessingLogin(true)
-        fetch('https://4yy6qslsrf.execute-api.us-east-1.amazonaws.com/default/login', { method: "POST", body: JSON.stringify(formJson) }).then((response) => {
+        fetch('https://4yy6qslsrf.execute-api.us-east-1.amazonaws.com/default/login', { 
+            method: "POST", 
+            body: JSON.stringify(formJson),
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json"
+              }
+        }).then((response) => {
             response.json().then((json) => {
                 setProcessingLogin(false)
                 if (json["success"] === true) {
