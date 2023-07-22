@@ -126,8 +126,8 @@ function App() {
   else if (loggedIn && !loaded) {
     console.log("not loaded")
     return (
-      <div class="container">
-        <h1 class="loading">loading...</h1>
+      <div className="container">
+        <h1 className="loading">loading...</h1>
       </div>
     )
   }
@@ -136,7 +136,41 @@ function App() {
     console.log(s3Data[0]["link"]["props"]["href"])
     return (
       <>
-      <BaseTable data={s3Data} width={window.innerWidth} height={window.innerHeight} columns={columns}></BaseTable>
+      <div className="header">
+        <a href="https://generalsafety.tech"><img src="https://generalsafety.tech/images/logos/logo.svg" width={112} height={28} style={
+          {
+            "marginTop": "8px",
+            "marginLeft": "4px",
+            "marginRight": "4px",
+           "marginBottom": "4px",
+           "paddingLeft": "5px",
+           "paddingTop": "5px",
+           "paddingRight": "5px",
+           "paddingBottom": "5px"
+          }
+        }></img></a>
+        <button style={
+          {
+            "justifyContent": "flex-end",
+            "height": 28,
+            "width": 112,
+            "marginTop": "8px",
+            "marginLeft": "4px",
+            "marginRight": "4px",
+           "marginBottom": "4px",
+           "paddingLeft": "5px",
+           "paddingTop": "5px",
+           "paddingRight": "5px",
+           "paddingBottom": "5px"
+          }
+        } onClick={() => {
+          Cookies.remove("auth")
+          Cookies.remove("username")
+          setAuth(null)
+          
+        }}>Log out</button>
+      </div>
+      <BaseTable data={s3Data} width={window.innerWidth} height={window.innerHeight - 50} columns={columns}></BaseTable>
       </>
       )
   } else {
