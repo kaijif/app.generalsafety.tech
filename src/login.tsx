@@ -47,8 +47,24 @@ export default function SignInPage({ username, setUsername, password, setPasswor
     }
     if (!processingLogin) {
         return (
+            <>
+            <div className="header">
+                <a href="https://generalsafety.tech">
+                    <img src="https://generalsafety.tech/images/logos/logo.svg" width={112} height={28} style={
+                    {
+                        "marginTop": "8px",
+                        "marginLeft": "4px",
+                        "marginRight": "4px",
+                    "marginBottom": "4px",
+                    "paddingLeft": "5px",
+                    "paddingTop": "5px",
+                    "paddingRight": "5px",
+                    "paddingBottom": "5px"
+                    }
+                    }></img>
+                </a>
+            </div>
             <div className="text-center m-5-auto">
-                <h2>Sign in</h2>
                 <form method="post" onSubmit={handleSubmit}>
                     <p>
                         <label>Username</label><br/>
@@ -67,12 +83,13 @@ export default function SignInPage({ username, setUsername, password, setPasswor
                     </p>
                 </form>
             </div>
+            </>
         )
     } else {
         return (
-            <h1>
-                Logging in...
-            </h1>
+            <div className="container">
+                <h1 className="loading">loading...</h1>
+          </div>
         )
     }
 }
