@@ -25,7 +25,7 @@ export default function SignInPage({ username, setUsername, password, setPasswor
             method: "POST", 
             body: JSON.stringify(formJson),
             headers: {
-                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Origin": 'https://4yy6qslsrf.execute-api.us-east-1.amazonaws.com/default/login',
                 "Content-Type": "application/json"
               }
         }).then((response) => {
