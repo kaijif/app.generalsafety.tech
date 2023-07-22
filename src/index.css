@@ -88,6 +88,11 @@ input {
   border: none
 }
 
+.loading {
+  text-align: center;
+  
+}
+
 #sub_btn {
   display: block;
   width: 100%;

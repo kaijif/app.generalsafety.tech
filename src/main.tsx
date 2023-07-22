@@ -126,7 +126,7 @@ function App() {
   else if (loggedIn && !loaded) {
     console.log("not loaded")
     return (
-      <h1>loading...</h1>
+      <h1 class="loading">loading...</h1>
     )
   }
   else if (loggedIn && loaded) {
