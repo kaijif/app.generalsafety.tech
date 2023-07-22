@@ -96,7 +96,7 @@ function App() {
           }),
           headers: {
             "Authorization":auth,
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": "https://4yy6qslsrf.execute-api.us-east-1.amazonaws.com/default/dbAPI/" + username,
             "Content-Type": "application/json"
           }
         }
@@ -126,7 +126,9 @@ function App() {
   else if (loggedIn && !loaded) {
     console.log("not loaded")
     return (
-      <h1>loading...</h1>
+      <div class="container">
+        <h1 class="loading">loading...</h1>
+      </div>
     )
   }
   else if (loggedIn && loaded) {
