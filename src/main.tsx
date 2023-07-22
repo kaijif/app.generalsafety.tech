@@ -96,7 +96,8 @@ function App() {
           }),
           headers: {
             "Authorization":auth,
-            "Access-Control-Allow-Origin": "https://4yy6qslsrf.execute-api.us-east-1.amazonaws.com/default/dbAPI"
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json"
           }
         }
       ).then((response) => {
