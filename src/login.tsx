@@ -88,7 +88,8 @@ export default function SignInPage({ username, setUsername, password, setPasswor
     } else {
         return (
             <div className="container">
-                <h1 className="loading">loading...</h1>
+                <img src="https://generalsafety.tech/images/loading.gif" height={40} width={40} ></img>
+                <h1 className="loading">logging in...</h1>
           </div>
         )
     }
