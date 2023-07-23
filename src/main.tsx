@@ -102,6 +102,7 @@ function App() {
         }
       ).then((response) => {
         response.json().then((json) => {
+          if (json.length > 0) {
             json.forEach(item => {
               console.log(item)
               item["link"] = <a href={item["link"]}>Download</a>
@@ -110,6 +111,7 @@ function App() {
               item["date"] = date.toDateString()
               item["time"] = date.toTimeString()
             })
+          }
           setS3Data(json.reverse())
           setLoaded(true)
         })  
