@@ -110,7 +110,7 @@ function App() {
               item["date"] = date.toDateString()
               item["time"] = date.toTimeString()
             })
-          setS3Data(json)
+          setS3Data(json.reverse())
           setLoaded(true)
         })  
       })
