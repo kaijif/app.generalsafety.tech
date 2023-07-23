@@ -102,15 +102,22 @@ function App() {
         }
       ).then((response) => {
         response.json().then((json) => {
+          if (json.length > 0) {
             json.forEach(item => {
               console.log(item)
               item["link"] = <a href={item["link"]}>Download</a>
               console.log(item["date"].toString().substring(0,4), item["date"].toString().substring(4, 6), item["date"].toString().substring(6, 8))
-              let date = new Date(item["date"].toString().substring(0,4), item["date"].toString().substring(4, 6), item["date"].toString().substring(6, 8), item["time"].toString().substring(0,2), item["time"].toString().substring(2,4), item["time"].toString().substring(4,6))
-              item["date"] = date.toDateString()
-              item["time"] = date.toTimeString()
+              item["date_sort"] = new Date(item["date"].toString().substring(0,4), item["date"].toString().substring(4, 6), item["date"].toString().substring(6, 8), item["time"].toString().substring(0,2), item["time"].toString().substring(2,4), item["time"].toString().substring(4,6))
+              item["date"] = item["date_sort"].toDateString()
+              item["time"] = item["date_sort"].toTimeString()
             })
-          setS3Data(json.reverse())
+            json.sort((a, b) => {
+              console.log((a.date_sort - b.date_sort).valueOf())
+              return (a.date_sort - b.date_sort).valueOf();
+            }).reverse()
+          }
+
+          setS3Data(json)
           setLoaded(true)
         })  
       })
