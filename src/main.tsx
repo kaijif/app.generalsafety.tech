@@ -20,7 +20,7 @@ class ColumnObject {
   key: string;
   dataKey: string;
   title: string;
-  width: number = 600;
+  width: number;
   sortable: boolean=false;
   public constructor(init?:Partial<ColumnObject>) {
     Object.assign(this, init);
@@ -28,10 +28,10 @@ class ColumnObject {
 }
 
 let columns: ColumnObject[] = [
-  new ColumnObject({key:"date", dataKey:"date", title:"Incident Date", sortable:true}),
-  new ColumnObject({key:"time", dataKey:"time", title:"Incident Time"}),
-  new ColumnObject({key:"bus_number", dataKey:"bus_number", title:"Bus Number", sortable:true}),
-  new ColumnObject({key:"link", dataKey:"link", title:"Video"})
+  new ColumnObject({key:"date", dataKey:"date", title:"Incident Date", sortable:true, width: window.innerWidth / 5}),
+  new ColumnObject({key:"time", dataKey:"time", title:"Incident Time", width: window.innerWidth * 2 / 5}),
+  new ColumnObject({key:"bus_number", dataKey:"bus_number", title:"Bus Number", sortable:true, width: window.innerWidth / 5}),
+  new ColumnObject({key:"link", dataKey:"link", title:"Video", width: window.innerWidth / 5})
 ]
 
 
@@ -118,6 +118,7 @@ function App() {
       console.log("data getter awaiting login")
     }
   }, [pageNumber, auth])
+
   if (!loggedIn) {
     return(
       <LoginScreen username={username} setUsername={setUsername} password={password} setPassword={setPassword} setAuth={setAuth}/>
@@ -126,9 +127,12 @@ function App() {
   else if (loggedIn && !loaded) {
     console.log("not loaded")
     return (
-      <div className="container">
-        <h1 className="loading">loading...</h1>
-      </div>
+      <>
+        <div className="container">
+          <img src="https://generalsafety.tech/images/loading.gif" height={40} width={40} ></img>
+          <p className="loading">loading...</p>
+        </div>
+      </>
     )
   }
   else if (loggedIn && loaded) {
@@ -167,7 +171,7 @@ function App() {
           Cookies.remove("auth")
           Cookies.remove("username")
           setAuth(null)
-          
+
         }}>Log out</button>
       </div>
       <BaseTable data={s3Data} width={window.innerWidth} height={window.innerHeight - 50} columns={columns}></BaseTable>
