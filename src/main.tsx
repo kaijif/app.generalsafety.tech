@@ -3,15 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { useState, useEffect } from "react";
 import './index.css'
 import 'react-base-table/styles.css'
-import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from '@tanstack/react-table'
-import ReactPlayer from 'react-player'
 import BaseTable, { Column, ColumnShape } from 'react-base-table'
-import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
 import Cookies from 'js-cookie'
 import LoginScreen from "./login"
@@ -64,27 +56,19 @@ function App() {
   const [s3Data, setS3Data] = useState(null)
 
   let auth_raw = Cookies.get("auth")
-  if (auth_raw === undefined) {
-    console.log("no auth cookie")
-  } else if (auth === null){
+  if (auth_raw !== undefined && auth === null){
     setAuth(auth_raw)
-  } else {
-    console.log("auth set up")
   }
 
   let uname_raw = Cookies.get("username")
-  if (uname_raw === undefined) {
-    console.log("no username cookie")
-  } else if (username === null) {
+  if (uname_raw !== undefined && username === null) {
     setUsername(uname_raw)
-  } else {
-    console.log("username set up")
   }
 
   let loggedIn = auth === null || username === null ? false : true
 
   useEffect(() => {
-    console.log(loggedIn)
+    
     if (loggedIn) {
       fetch(
         "https://4yy6qslsrf.execute-api.us-east-1.amazonaws.com/default/dbAPI/" + username,
@@ -104,15 +88,16 @@ function App() {
         response.json().then((json) => {
           if (json.length > 0) {
             json.forEach(item => {
-              console.log(item)
+              
               item["link"] = <a href={item["link"]}>Download</a>
-              console.log(item["date"].toString().substring(0,4), item["date"].toString().substring(4, 6), item["date"].toString().substring(6, 8))
-              item["date_sort"] = new Date(item["date"].toString().substring(0,4), item["date"].toString().substring(4, 6), item["date"].toString().substring(6, 8), item["time"].toString().substring(0,2), item["time"].toString().substring(2,4), item["time"].toString().substring(4,6))
+              
+              item["date_sort"] = new Date(item["date"].toString().substring(0,4), parseInt((item["date"] - 100).toString().substring(4, 6)), item["date"].toString().substring(6, 8), item["time"].toString().substring(0,2), item["time"].toString().substring(2,4), item["time"].toString().substring(4,6))
+              new Date()
               item["date"] = item["date_sort"].toDateString()
               item["time"] = item["date_sort"].toTimeString()
             })
             json.sort((a, b) => {
-              console.log((a.date_sort - b.date_sort).valueOf())
+              
               return (a.date_sort - b.date_sort).valueOf();
             }).reverse()
           }
@@ -122,7 +107,7 @@ function App() {
         })  
       })
     } else {
-      console.log("data getter awaiting login")
+      
     }
   }, [pageNumber, auth])
 
@@ -132,7 +117,7 @@ function App() {
     )
   }
   else if (loggedIn && !loaded) {
-    console.log("not loaded")
+    
     return (
       <>
         <div className="container">
@@ -143,8 +128,8 @@ function App() {
     )
   }
   else if (loggedIn && loaded) {
-    console.log("loaded?")
-    console.log(s3Data[0]["link"]["props"]["href"])
+    
+    
     return (
       <>
       <div className="header">
@@ -185,7 +170,7 @@ function App() {
       </>
       )
   } else {
-    console.log("what?")
+    
   }
 }
 
