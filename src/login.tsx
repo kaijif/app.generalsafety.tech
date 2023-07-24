@@ -19,7 +19,6 @@ export default function SignInPage({ username, setUsername, password, setPasswor
     
         // Or you can work with it as a plain object:
         const formJson = Object.fromEntries(formData.entries())
-        console.log(formJson)
         setProcessingLogin(true)
         fetch('https://4yy6qslsrf.execute-api.us-east-1.amazonaws.com/default/login', { 
             method: "POST", 
@@ -32,13 +31,12 @@ export default function SignInPage({ username, setUsername, password, setPasswor
             response.json().then((json) => {
                 setProcessingLogin(false)
                 if (json["success"] === true) {
-                    console.log("login successful")
+                    
                     setUsername(formJson["username"])
                     Cookies.set("username", formJson["username"])
                     setAuth(json["auth_cookie"])
                     Cookies.set("auth", json["auth_cookie"])
                 } else {
-                    console.log("login failed")
                     setLoginFailed(true)
                 }
             })
