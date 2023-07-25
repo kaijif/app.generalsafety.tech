@@ -7,7 +7,6 @@ import BaseTable, { Column, ColumnShape } from 'react-base-table'
 import 'video.js/dist/video-js.css';
 import Cookies from 'js-cookie'
 import LoginScreen from "./login"
-
 class ColumnObject {
   key: string;
   dataKey: string;
@@ -21,8 +20,9 @@ class ColumnObject {
 
 let columns: ColumnObject[] = [
   new ColumnObject({key:"date", dataKey:"date", title:"Incident Date", sortable:true, width: window.innerWidth / 5}),
-  new ColumnObject({key:"time", dataKey:"time", title:"Incident Time", width: window.innerWidth * 2 / 5}),
+  new ColumnObject({key:"time", dataKey:"time", title:"Incident Time", width: window.innerWidth / 5}),
   new ColumnObject({key:"bus_number", dataKey:"bus_number", title:"Bus Number", sortable:true, width: window.innerWidth / 5}),
+  new ColumnObject({key:"saw_motion", dataKey:"saw_motion", title:"Violation?", width: window.innerWidth / 5}),
   new ColumnObject({key:"link", dataKey:"link", title:"Video", width: window.innerWidth / 5})
 ]
 
@@ -32,6 +32,7 @@ class Row {
   date: string;
   time: string;
   bus_number: string;
+  saw_motion: boolean;
   link: string;
   public constructor(init?:Partial<Row>) {
     Object.assign(this, init);
@@ -54,7 +55,6 @@ function App() {
   const [username, setUsername] = useState(null)
   const [password, setPassword] = useState(null)
   const [s3Data, setS3Data] = useState(null)
-
   let auth_raw = Cookies.get("auth")
   if (auth_raw !== undefined && auth === null){
     setAuth(auth_raw)
@@ -88,13 +88,12 @@ function App() {
         response.json().then((json) => {
           if (json.length > 0) {
             json.forEach(item => {
-              
               item["link"] = <a href={item["link"]}>Download</a>
-              
               item["date_sort"] = new Date(item["date"].toString().substring(0,4), parseInt((item["date"] - 100).toString().substring(4, 6)), item["date"].toString().substring(6, 8), item["time"].toString().substring(0,2), item["time"].toString().substring(2,4), item["time"].toString().substring(4,6))
               new Date()
               item["date"] = item["date_sort"].toDateString()
               item["time"] = item["date_sort"].toTimeString()
+              item["saw_motion"] = item["saw_motion"] ? "‼️" : "✅"
             })
             json.sort((a, b) => {
               
