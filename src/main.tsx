@@ -63,8 +63,18 @@ function App() {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [modalData, setModalData] = React.useState(null);
   function openModal(url) {
+    console.log(url)
     setIsOpen(true);
-    setModalData(url)
+    setModalData({
+      type: "video",
+      sources: [
+        {
+          src: url,
+          type: "video/mp4",
+          size: 720,
+        }
+      ]
+    })
   }
   
   function closeModal() {
@@ -103,7 +113,8 @@ function App() {
         response.json().then((json) => {
           if (json.length > 0) {
             json.forEach(item => {
-              item["link"] = <button onClick={() => {openModal(item["link"])}}>Review</button>
+              const url = item["link"]
+              item["link"] = <button onClick={() => {openModal(url)}}>Review</button>
               item["date_sort"] = new Date(item["date"].toString().substring(0,4), parseInt((item["date"] - 100).toString().substring(4, 6)), item["date"].toString().substring(6, 8), item["time"].toString().substring(0,2), item["time"].toString().substring(2,4), item["time"].toString().substring(4,6))
               new Date()
               item["date"] = item["date_sort"].toDateString()
@@ -186,8 +197,9 @@ function App() {
         onAfterOpen={() => {}}
         onRequestClose={closeModal}
         contentLabel="Example Modal"
+        className="Modal"
       >
-        <Plyr source={modalData} />
+        <div><Plyr source={modalData}/></div>
       </Modal>
       </>
       )
