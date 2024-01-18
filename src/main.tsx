@@ -4,9 +4,12 @@ import { useState, useEffect } from "react";
 import './index.css'
 import 'react-base-table/styles.css'
 import BaseTable, { Column, ColumnShape } from 'react-base-table'
-import 'video.js/dist/video-js.css';
+import Plyr from "plyr-react"
+import "plyr-react/plyr.css"
 import Cookies from 'js-cookie'
 import LoginScreen from "./login"
+import Modal from 'react-modal';
+
 class ColumnObject {
   key: string;
   dataKey: string;
@@ -48,6 +51,8 @@ let data: Row[] = [
 //   width: 
 // }
 
+
+
 function App() {
   const [loaded, setLoaded] = useState(false)
   const [pageNumber, setPageNumber] = useState(1)
@@ -55,6 +60,16 @@ function App() {
   const [username, setUsername] = useState(null)
   const [password, setPassword] = useState(null)
   const [s3Data, setS3Data] = useState(null)
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalData, setModalData] = React.useState(null);
+  function openModal(url) {
+    setIsOpen(true);
+    setModalData(url)
+  }
+  
+  function closeModal() {
+    setIsOpen(false);
+  }
   let auth_raw = Cookies.get("auth")
   if (auth_raw !== undefined && auth === null){
     setAuth(auth_raw)
@@ -88,7 +103,7 @@ function App() {
         response.json().then((json) => {
           if (json.length > 0) {
             json.forEach(item => {
-              item["link"] = <a href={item["link"]}>Download</a>
+              item["link"] = <button onClick={(setModalData(item["link"]))}>Review</button>
               item["date_sort"] = new Date(item["date"].toString().substring(0,4), parseInt((item["date"] - 100).toString().substring(4, 6)), item["date"].toString().substring(6, 8), item["time"].toString().substring(0,2), item["time"].toString().substring(2,4), item["time"].toString().substring(4,6))
               new Date()
               item["date"] = item["date_sort"].toDateString()
@@ -166,6 +181,14 @@ function App() {
         }}>Log out</button>
       </div>
       <BaseTable data={s3Data} width={window.innerWidth} height={window.innerHeight - 50} columns={columns}></BaseTable>
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={() => {}}
+        onRequestClose={closeModal}
+        contentLabel="Example Modal"
+      >
+        <Plyr source={modalData} />
+      </Modal>
       </>
       )
   } else {
