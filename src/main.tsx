@@ -4,11 +4,10 @@ import { useState, useEffect } from "react";
 import './index.css'
 import 'react-base-table/styles.css'
 import BaseTable, { Column, ColumnShape } from 'react-base-table'
-import Plyr from "plyr-react"
-import "plyr-react/plyr.css"
 import Cookies from 'js-cookie'
 import LoginScreen from "./login"
 import Modal from 'react-modal';
+import ReactPlayer from 'react-player'
 
 class ColumnObject {
   key: string;
@@ -199,7 +198,7 @@ function App() {
         contentLabel="Example Modal"
         className="Modal"
       >
-        <div><Plyr source={modalData}/></div>
+        <ReactPlayer url={modalData} />
       </Modal>
       </>
       )
