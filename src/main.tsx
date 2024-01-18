@@ -103,7 +103,7 @@ function App() {
         response.json().then((json) => {
           if (json.length > 0) {
             json.forEach(item => {
-              item["link"] = <button onClick={(setModalData(item["link"]))}>Review</button>
+              item["link"] = <button onClick={() => {setModalData(item["link"])}}>Review</button>
               item["date_sort"] = new Date(item["date"].toString().substring(0,4), parseInt((item["date"] - 100).toString().substring(4, 6)), item["date"].toString().substring(6, 8), item["time"].toString().substring(0,2), item["time"].toString().substring(2,4), item["time"].toString().substring(4,6))
               new Date()
               item["date"] = item["date_sort"].toDateString()
