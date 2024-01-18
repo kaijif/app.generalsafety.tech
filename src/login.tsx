@@ -1,7 +1,7 @@
 import * as React from 'react'
 import ReactDOM from 'react-dom/client'
 import { useState, useEffect } from "react"
-import './index.css'
+import './output.css'
 import Cookies from 'js-cookie'
 
 export default function SignInPage({ username, setUsername, password, setPassword, setAuth }) {

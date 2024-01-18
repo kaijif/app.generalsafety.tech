@@ -11,6 +11,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
 function App() { 
+  
   return <div className="text-teal-700 p-16">hello</div>
 }
 

@@ -9,3 +9,14 @@ export class Row {
       Object.assign(this, init);
     }
   }
+
+  export class ColumnObject {
+    key: string;
+    dataKey: string;
+    title: string;
+    width: number;
+    sortable: boolean=false;
+    public constructor(init?:Partial<ColumnObject>) {
+      Object.assign(this, init);
+    }
+  }
