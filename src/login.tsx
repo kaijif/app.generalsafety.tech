@@ -68,6 +68,7 @@ export default function SignInPage({ username, setUsername, password, setPasswor
                         <input type="text" name="username" class="login-input" placeholder="Username" required />
                     </p>
                     <p>
+                        <br/>
                         <input type="password" name="password" class="login-input" placeholder="Password" required />
                     </p>
                     <p>
