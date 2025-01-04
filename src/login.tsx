@@ -47,8 +47,8 @@ export default function SignInPage({ username, setUsername, password, setPasswor
         return (
             <>
             <div className="header">
-                <a href="https://generalsafety.tech">
-                    <img src="https://generalsafety.tech/images/logos/logo.svg" width={112} height={28} style={
+                <a href="https://nolyn.co">
+                    <img src="https://www.nolyn.co/img/logo.svg" width={112} height={28} style={
                     {
                         "marginTop": "8px",
                         "marginLeft": "4px",
@@ -86,7 +86,7 @@ export default function SignInPage({ username, setUsername, password, setPasswor
     } else {
         return (
             <div className="container">
-                <img src="https://generalsafety.tech/images/loading.gif" height={40} width={40} ></img>
+                <img src="https://nolyn.co/images/loading.gif" height={40} width={40} ></img>
                 <h1 className="loading">logging in...</h1>
           </div>
         )

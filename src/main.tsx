@@ -64,16 +64,7 @@ function App() {
   function openModal(url) {
     console.log(url)
     setIsOpen(true);
-    setModalData({
-      type: "video",
-      sources: [
-        {
-          src: url,
-          type: "video/mp4",
-          size: 720,
-        }
-      ]
-    })
+    setModalData(url)
   }
   
   function closeModal() {
@@ -145,7 +136,7 @@ function App() {
     return (
       <>
         <div className="container">
-          <img src="https://generalsafety.tech/images/loading.gif" height={40} width={40} ></img>
+          <img src="https://nolyn.co/images/loading.gif" height={40} width={40} ></img>
           <p className="loading">loading...</p>
         </div>
       </>
@@ -157,7 +148,7 @@ function App() {
     return (
       <>
       <div className="header">
-        <a href="https://generalsafety.tech"><img src="https://generalsafety.tech/images/logos/logo.svg" width={112} height={28} style={
+        <a href="https://nolyn.co"><img src="https://nolyn.co/img/logo.svg" width={112} height={28} style={
           {
             "marginTop": "8px",
             "marginLeft": "4px",
@@ -195,10 +186,19 @@ function App() {
         isOpen={modalIsOpen}
         onAfterOpen={() => {}}
         onRequestClose={closeModal}
+        style={{
+          content: {
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }
+        }}
         contentLabel="Example Modal"
         className="Modal"
       >
-        <ReactPlayer url={modalData} />
+        <div className="video"><ReactPlayer url={modalData} controls={true}/></div>
+        <button onClick={closeModal}>close</button>
+
       </Modal>
       </>
       )
