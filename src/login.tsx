@@ -65,13 +65,10 @@ export default function SignInPage({ username, setUsername, password, setPasswor
             <div className="text-center m-5-auto login-input">
                 <form method="post" onSubmit={handleSubmit}>
                     <p>
-                        <label>Username</label><br/>
-                        <input type="text" name="username" class="login-input" required />
+                        <input type="text" name="username" class="login-input" placeholder="Username" required />
                     </p>
                     <p>
-                        <label>Password</label>
-                        <br/>
-                        <input type="password" name="password" class="login-input" required />
+                        <input type="password" name="password" class="login-input" placeholder="Password" required />
                     </p>
                     <p>
                         <button id="sub_btn" type="submit" >Login</button>
