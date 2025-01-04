@@ -62,7 +62,7 @@ export default function SignInPage({ username, setUsername, password, setPasswor
                     }></img>
                 </a>
             </div>
-            <div className="text-center m-5-auto">
+            <div className="text-center m-5-auto login-input">
                 <form method="post" onSubmit={handleSubmit}>
                     <p>
                         <label>Username</label><br/>

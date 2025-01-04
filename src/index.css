@@ -97,7 +97,7 @@ form {
   display: inline-block;
   background: #f3f3f3;
   border: 5px solid #ddd;
-  border-radius: 2px;
+  border-radius: 5px;
   padding: 2rem;
   margin: 2rem 0 1rem 0
 }
@@ -118,7 +118,7 @@ input {
   width: 15rem;
   padding: .10rem;
   margin: 20px;
-  border-radius: 1px;
+  border-radius: 5px;
   outline: none;
   border: none
 }
@@ -130,7 +130,7 @@ input {
   border: none;
   background: #222;
   color: #fff;
-  border-radius: 3px;
+  border-radius: 5px;
   margin: 30px 0
 }
 
@@ -145,5 +145,5 @@ footer p {
 }
 
 .login-input {
-  border-radius: 3px;
+  border-radius: 5px;
 }
