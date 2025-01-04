@@ -143,3 +143,7 @@ footer p {
   margin: 0;
   font-size: .9rem
 }
+
+.login-input {
+  border-radius: 3px;
+}
