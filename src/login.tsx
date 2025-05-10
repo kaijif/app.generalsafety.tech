@@ -47,8 +47,8 @@ export default function SignInPage({ username, setUsername, password, setPasswor
         return (
             <>
             <div className="header">
-                <a href="https://generalsafety.tech">
-                    <img src="https://generalsafety.tech/images/logos/logo.svg" width={112} height={28} style={
+                <a href="https://nolyn.co">
+                    <img src="https://www.nolyn.co/img/logo.svg" width={112} height={28} style={
                     {
                         "marginTop": "8px",
                         "marginLeft": "4px",
@@ -62,16 +62,14 @@ export default function SignInPage({ username, setUsername, password, setPasswor
                     }></img>
                 </a>
             </div>
-            <div className="text-center m-5-auto">
+            <div className="text-center m-5-auto login-input">
                 <form method="post" onSubmit={handleSubmit}>
                     <p>
-                        <label>Username</label><br/>
-                        <input type="text" name="username" required />
+                        <input type="text" name="username" class="login-input" placeholder="Username" required />
                     </p>
                     <p>
-                        <label>Password</label>
                         <br/>
-                        <input type="password" name="password" required />
+                        <input type="password" name="password" class="login-input" placeholder="Password" required />
                     </p>
                     <p>
                         <button id="sub_btn" type="submit" >Login</button>
@@ -86,7 +84,7 @@ export default function SignInPage({ username, setUsername, password, setPasswor
     } else {
         return (
             <div className="container">
-                <img src="https://generalsafety.tech/images/loading.gif" height={40} width={40} ></img>
+                <img src="https://nolyn.co/images/loading.gif" height={40} width={40} ></img>
                 <h1 className="loading">logging in...</h1>
           </div>
         )

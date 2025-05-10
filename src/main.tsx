@@ -4,9 +4,11 @@ import { useState, useEffect } from "react";
 import './index.css'
 import 'react-base-table/styles.css'
 import BaseTable, { Column, ColumnShape } from 'react-base-table'
-import 'video.js/dist/video-js.css';
 import Cookies from 'js-cookie'
 import LoginScreen from "./login"
+import Modal from 'react-modal';
+import ReactPlayer from 'react-player'
+
 class ColumnObject {
   key: string;
   dataKey: string;
@@ -48,6 +50,8 @@ let data: Row[] = [
 //   width: 
 // }
 
+
+
 function App() {
   const [loaded, setLoaded] = useState(false)
   const [pageNumber, setPageNumber] = useState(1)
@@ -55,6 +59,17 @@ function App() {
   const [username, setUsername] = useState(null)
   const [password, setPassword] = useState(null)
   const [s3Data, setS3Data] = useState(null)
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalData, setModalData] = React.useState(null);
+  function openModal(url) {
+    console.log(url)
+    setIsOpen(true);
+    setModalData(url)
+  }
+  
+  function closeModal() {
+    setIsOpen(false);
+  }
   let auth_raw = Cookies.get("auth")
   if (auth_raw !== undefined && auth === null){
     setAuth(auth_raw)
@@ -88,7 +103,8 @@ function App() {
         response.json().then((json) => {
           if (json.length > 0) {
             json.forEach(item => {
-              item["link"] = <a href={item["link"]}>Download</a>
+              const url = item["link"]
+              item["link"] = <button onClick={() => {openModal(url)}}>Review</button>
               item["date_sort"] = new Date(item["date"].toString().substring(0,4), parseInt((item["date"] - 100).toString().substring(4, 6)), item["date"].toString().substring(6, 8), item["time"].toString().substring(0,2), item["time"].toString().substring(2,4), item["time"].toString().substring(4,6))
               new Date()
               item["date"] = item["date_sort"].toDateString()
@@ -120,7 +136,7 @@ function App() {
     return (
       <>
         <div className="container">
-          <img src="https://generalsafety.tech/images/loading.gif" height={40} width={40} ></img>
+          <img src="https://nolyn.co/images/loading.gif" height={40} width={40} ></img>
           <p className="loading">loading...</p>
         </div>
       </>
@@ -132,7 +148,7 @@ function App() {
     return (
       <>
       <div className="header">
-        <a href="https://generalsafety.tech"><img src="https://generalsafety.tech/images/logos/logo.svg" width={112} height={28} style={
+        <a href="https://nolyn.co"><img src="https://nolyn.co/img/logo.svg" width={112} height={28} style={
           {
             "marginTop": "8px",
             "marginLeft": "4px",
@@ -166,6 +182,24 @@ function App() {
         }}>Log out</button>
       </div>
       <BaseTable data={s3Data} width={window.innerWidth} height={window.innerHeight - 50} columns={columns}></BaseTable>
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={() => {}}
+        onRequestClose={closeModal}
+        style={{
+          content: {
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }
+        }}
+        contentLabel="Example Modal"
+        className="Modal"
+      >
+        <div className="video"><ReactPlayer url={modalData} controls={true}/></div>
+        <button onClick={closeModal}>close</button>
+
+      </Modal>
       </>
       )
   } else {
