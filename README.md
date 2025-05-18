@@ -1,3 +1,3 @@
-# The General Safety cloud platform
+# The Nolyn cloud platform
 
 proprietary and confidential
